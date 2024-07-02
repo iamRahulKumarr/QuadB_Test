@@ -22,3 +22,5 @@ Shopping Cart:
 
 
 The project is not comlplete yet.......
+
+## I HAVE PROVIDED THE POSTMAN COLLECTION AS WELL AS MONGODB DUMMY COLLECTION JSON FILES 
