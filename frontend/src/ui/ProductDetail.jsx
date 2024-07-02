@@ -10,10 +10,12 @@ import {
   getCartStats,
 } from '../redux/slice/cart';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function ProductDetail() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showButton, setShowButton] = useState(true);
   const userId = useSelector(getUserId);
   const product = useLoaderData();
   const isUserLogged = useSelector(getIsLogged);
@@ -23,15 +25,29 @@ function ProductDetail() {
 
   const { error: cartError } = useSelector(getCartStats);
 
+  useEffect(() => {
+    if (isProductInCart) {
+      setShowButton(false);
+    }
+  }, [isProductInCart]);
+
   function handleAddToCart() {
     if (!isUserLogged) {
       return navigate('/login');
-    } else if (cartError && !null) {
-      return dispatch(clearCartError());
+    } else if (cartError) {
+      dispatch(clearCartError());
     } else {
-      return dispatch(addToCart({ userId, productId: product._id }));
+      dispatch(addToCart({ userId, productId: product._id }))
+        .unwrap()
+        .then(() => {
+          setShowButton(false);
+        })
+        .catch((error) => {
+          console.error('Failed to add product to cart:', error);
+        });
     }
   }
+
   return (
     <div className="grid xl:grid-cols-2 gap-5 mt-5 px-5">
       <div className="flex justify-center gap-1">
@@ -47,7 +63,7 @@ function ProductDetail() {
           </span>
         </h2>
         <p className="font-bold text-lg my-5">₹&nbsp;{product.price}</p>
-        {isProductInCart ? (
+        {!showButton ? (
           <button
             className="bg-red-300 text-white py-2 px-4 align-middle flex items-center gap-2  justify-center font-bold uppercase"
             disabled={true}
@@ -85,4 +101,5 @@ export async function loader({ params }) {
   const data = await fetchProductInfo(productId);
   return data;
 }
+
 export default ProductDetail;
