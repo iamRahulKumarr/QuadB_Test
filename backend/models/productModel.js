@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
   categoryId: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'category',
     required: [true, 'A product must have a category.'],
   },
@@ -10,7 +10,15 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A product must have a name.'],
   },
-  image: String,
+  gender: {
+    type: String,
+    enum: {
+      values: ['male', 'female'],
+      message: 'A product must only have genderType: male or female.',
+    },
+    required: [true, 'A product must have a genderType.'],
+  },
+  photo: String,
   description: {
     type: String,
     required: [true, 'A product must have a description.'],

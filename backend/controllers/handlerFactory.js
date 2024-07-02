@@ -10,9 +10,9 @@ exports.createOne = (Model) =>
     });
   });
 
-exports.getAll = (Model) =>
+exports.getAll = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.find(req.body);
+    const doc = await Model.find(req.query).populate(popOptions);
 
     return res.status(200).json({
       status: 'success',
@@ -20,9 +20,9 @@ exports.getAll = (Model) =>
     });
   });
 
-exports.getOne = (Model) =>
+exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.findById(req.params.id);
+    const doc = await Model.findById(req.params.id).populate(popOptions);
 
     if (!doc) {
       return next(new AppError('Cant find document with that ID.', 404));
@@ -34,12 +34,12 @@ exports.getOne = (Model) =>
     });
   });
 
-exports.updateOne = (Model) =>
+exports.updateOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
-    });
+    }).populate(popOptions);
 
     if (!doc) {
       return next(new AppError('Cant find document with that ID.', 404));

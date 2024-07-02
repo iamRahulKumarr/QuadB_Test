@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const app = require('./app');
+const seed = require('./seed');
 
 const DATABASE_CONNECT = process.env.DATABASE_CONNECT;
 

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.redGradient {
+  background: #cb2d3e;
+  background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e);
+  background: linear-gradient(to right, #ef473a, #cb2d3e);
+}
+
+.imageHead {
+  clip-path: polygon(0 94%, 100% 74%, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0 80%, 100% 65%, 100% 100%, 0% 100%);
+}

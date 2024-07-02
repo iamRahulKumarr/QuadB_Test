@@ -16,7 +16,9 @@ const categoryUpload = multer({ storage: categoryStorage });
 exports.addCategoryPhoto = categoryUpload.single('photo');
 
 exports.setFilename = (req, res, next) => {
-  req.body.photo = 'categories/' + req.file.filename;
+  if (req.file) {
+    req.body.photo = 'categories/' + req.file.filename;
+  }
   next();
 };
 

@@ -14,13 +14,13 @@ const createSendToken = (user, statusCode, message, res) => {
     username: user.username,
     email: user.email,
     userType: user.userType,
+    token,
   };
 
   return res.status(statusCode).json({
     status: 'success',
     message,
     data,
-    token,
   });
 };
 
@@ -73,3 +73,12 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = currentUser;
   next();
 });
+
+exports.restrictTo = (...userTypes) => {
+  return (req, res, next) => {
+    if (!userTypes.includes(req.user.userType)) {
+      return next(new AppError('You are not authorized for this action.', 403));
+    }
+    next();
+  };
+};

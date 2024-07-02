@@ -3,8 +3,8 @@ const handlerFactory = require('./handlerFactory');
 
 exports.create = handlerFactory.createOne(Cart);
 
-exports.getAll = handlerFactory.getAll(Cart);
+exports.getAll = handlerFactory.getAll(Cart, { path: 'product' });
 
-exports.updateOne = handlerFactory.updateOne(Cart);
+exports.updateOne = handlerFactory.updateOne(Cart, { path: 'product' });
 
 exports.deleteOne = handlerFactory.deleteOne(Cart);
