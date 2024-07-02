@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getIsLogged, login } from '../redux/slice/auth';
+import { getAuthError, getIsLogged, login } from '../redux/slice/auth';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 function Login() {
+  const loginError = useSelector(getAuthError);
   const isUserLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ function Login() {
 
   function handleLogin(e) {
     e.preventDefault();
-    if (formData.email && formData.password) {
+    if (formData.email !== '' && formData.password !== '') {
       dispatch(login(formData));
     }
     setFormData({ email: '', password: '' });
@@ -34,6 +35,11 @@ function Login() {
 
   return (
     <div className="w-4/5 mx-auto mt-16">
+      {loginError && (
+        <p className="text-center font-bold text-sm mb-5">
+          ❌&nbsp;{loginError}
+        </p>
+      )}
       <h1 className="font-bold text-center xl:text-3xl text-zinc-700">
         Welcome &nbsp; :)
       </h1>
@@ -58,10 +64,7 @@ function Login() {
           placeholder="Enter your password"
         />
 
-        <button
-          className="bg-red-600 text-white py-2 px-4 w-full font-bold uppercase"
-          onClick={() => {}}
-        >
+        <button className="bg-red-600 text-white py-2 px-4 w-full font-bold uppercase">
           Login
         </button>
         <p>

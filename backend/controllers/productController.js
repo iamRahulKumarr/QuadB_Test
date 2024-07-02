@@ -16,11 +16,11 @@ const productStorage = multer.diskStorage({
 
 const productUpload = multer({ storage: productStorage });
 
-exports.uploadProductPhoto = productUpload.single('photo');
+exports.uploadProductPhoto = productUpload.array('photo', 2);
 
 exports.setProductPhoto = (req, res, next) => {
-  if (req.file) {
-    req.body.photo = 'products/' + req.file.filename;
+  if (req.files) {
+    req.body.photo = req.files.map((photo) => 'products/' + photo.filename);
   }
   next();
 };

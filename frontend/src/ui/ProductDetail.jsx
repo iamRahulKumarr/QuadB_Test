@@ -17,6 +17,7 @@ function ProductDetail() {
   const userId = useSelector(getUserId);
   const product = useLoaderData();
   const isUserLogged = useSelector(getIsLogged);
+
   const isProductInCart =
     useSelector((state) => getCartItem(state, product._id)) || null;
 
@@ -34,8 +35,9 @@ function ProductDetail() {
   return (
     <div className="grid xl:grid-cols-2 gap-5 mt-5 px-5">
       <div className="flex justify-center gap-1">
-        <img className="h-96" src={BASE_URL + product.photo} />
-        <img className="h-96" src={BASE_URL + product.photo} />
+        {product.photo.map((photo) => (
+          <img key={photo} className="h-96" src={BASE_URL + photo} />
+        ))}
       </div>
       <div>
         <h2 className="text-zinc-600 text-2xl font-semibold border-b border-zinc-400 pb-5">

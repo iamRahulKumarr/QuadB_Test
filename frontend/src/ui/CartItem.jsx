@@ -3,11 +3,16 @@
 import { useState } from 'react';
 import { BASE_URL } from '../services/APIServices';
 import { useDispatch } from 'react-redux';
-import { updateCartItem } from '../redux/slice/cart';
+import { getCartItemQuantity, updateCartItem } from '../redux/slice/cart';
+import { useSelector } from 'react-redux';
 
 function CartItem({ product }) {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(product.quantity);
+
+  const { quantity: cartItemQuantity } = useSelector((state) =>
+    getCartItemQuantity(state, product._id)
+  );
+  const [quantity, setQuantity] = useState(cartItemQuantity);
 
   function handleIncrement() {
     setQuantity((quantity) => (quantity += 1));
@@ -19,7 +24,7 @@ function CartItem({ product }) {
   }
   return (
     <div className="flex gap-5">
-      <img className="h-64" src={BASE_URL + product.product.photo} />
+      <img className="h-64" src={BASE_URL + product.product.photo[0]} />
       <div className="grow space-y-4">
         <div className="flex border-b border-zinc-400">
           <h2 className="text-zinc-600 text-lg font-semibold pb-3 grow">
@@ -47,14 +52,16 @@ function CartItem({ product }) {
           >
             +
           </button>
-          <button
-            className="bg-red-600 text-white py-2 px-4 font-bold uppercase"
-            onClick={() =>
-              dispatch(updateCartItem({ cartId: product._id, quantity }))
-            }
-          >
-            Apply
-          </button>
+          {quantity !== product.quantity && (
+            <button
+              className="bg-red-600 text-white py-2 px-4 font-bold uppercase"
+              onClick={() =>
+                dispatch(updateCartItem({ cartId: product._id, quantity }))
+              }
+            >
+              Apply
+            </button>
+          )}
         </div>
       </div>
     </div>

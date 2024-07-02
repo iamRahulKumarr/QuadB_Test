@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema({
     },
     required: [true, 'A product must have a genderType.'],
   },
-  photo: String,
+  photo: [String],
   description: {
     type: String,
     required: [true, 'A product must have a description.'],

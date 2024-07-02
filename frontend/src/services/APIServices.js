@@ -41,6 +41,16 @@ export async function userLogin(email, password) {
   return response.data.data;
 }
 
+export async function userRegister(email, password, confirmPassword, username) {
+  const response = await axios.post(BASE_URL + 'api/user/register', {
+    email,
+    password,
+    confirmPassword,
+    username,
+  });
+  return response.data.data;
+}
+
 export async function addToCart(userId, productId, quantity = 1) {
   const response = await axios.post(
     BASE_URL + 'api/cart',

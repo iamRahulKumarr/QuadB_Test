@@ -18,8 +18,8 @@ export const addToCart = createAsyncThunk(
   }
 );
 
-export const addToCartOnLogin = createAsyncThunk(
-  'cart/addToCartOnLogin',
+export const addToCartWhileLogged = createAsyncThunk(
+  'cart/addToCartWhileLogged',
   async (_, { rejectWithValue }) => {
     try {
       const data = await fetchCart();
@@ -64,14 +64,14 @@ const cartSlice = createSlice({
         state.status = 'error';
         state.error = action.payload;
       })
-      .addCase(addToCartOnLogin.pending, (state) => {
+      .addCase(addToCartWhileLogged.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(addToCartOnLogin.fulfilled, (state, action) => {
+      .addCase(addToCartWhileLogged.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.cart = [...state.cart, action.payload];
+        state.cart = action.payload;
       })
-      .addCase(addToCartOnLogin.rejected, (state, action) => {
+      .addCase(addToCartWhileLogged.rejected, (state, action) => {
         state.status = 'error';
         state.error = action.payload;
       })
@@ -82,7 +82,7 @@ const cartSlice = createSlice({
         const updatedItem = action.payload;
         state.status = 'idle';
         state.cart = [...state.cart].map((item) =>
-          item.product === updateCartItem.product._id ? updatedItem : item
+          item._id === updatedItem._id ? updatedItem : item
         );
       })
       .addCase(updateCartItem.rejected, (state, action) => {
@@ -96,7 +96,10 @@ export const getCartStats = (state) => state.cart;
 export const getCartItems = (state) => state.cart.cart;
 
 export const getCartItem = (state, productId) =>
-  state.cart.cart.find((item) => item.product === productId);
+  state.cart.cart.find((item) => item.product._id === productId);
+
+export const getCartItemQuantity = (state, cartId) =>
+  state.cart.cart.find((item) => item._id === cartId);
 
 export const { clearCartError } = cartSlice.actions;
 export default cartSlice.reducer;

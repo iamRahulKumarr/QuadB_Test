@@ -1,11 +1,28 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { userLogin } from '../../services/APIServices';
+import { userLogin, userRegister } from '../../services/APIServices';
 
 export const login = createAsyncThunk(
   'auth/login',
   async (payload, { rejectWithValue }) => {
     try {
       const data = await userLogin(payload.email, payload.password);
+      return data;
+    } catch (err) {
+      return rejectWithValue(err.response.data.message);
+    }
+  }
+);
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const data = await userRegister(
+        payload.email,
+        payload.password,
+        payload.confirmPassword,
+        payload.username
+      );
       return data;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
@@ -23,6 +40,12 @@ const authSlice = createSlice({
     error: null,
   },
   reducers: {
+    setUserAuth: (state, action) => {
+      const { id, email, username, userType, token } = action.payload;
+      state.user = { id, email, username, userType };
+      state.token = token;
+      state.isLogged = true;
+    },
     logout: (state) => {
       state.user = {};
       state.error = '';
@@ -56,12 +79,36 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload;
         state.status = 'idle';
+      })
+      .addCase(register.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        const { username, userType, token, email, _id: id } = action.payload;
+        state.user.id = id;
+        state.user.username = username;
+        state.user.email = email;
+        state.user.userType = userType;
+        state.token = token;
+        state.status = 'idle';
+        state.isLogged = true;
+        localStorage.setItem('user_token', `Bearer ${token}`);
+        localStorage.setItem(
+          'user_info',
+          JSON.stringify({ id, username, userType, email })
+        );
+        localStorage.setItem('isLoggedIn', 'true');
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.error = action.payload;
+        state.status = 'idle';
       }),
 });
 export const getUserId = (state) => state.auth.user.id;
 export const getUserInfo = (state) => state.auth.user;
 export const getUserToken = (state) => state.auth.token;
 export const getIsLogged = (state) => state.auth.isLogged;
+export const getAuthError = (state) => state.auth.error;
 
-export const { logout } = authSlice.actions;
+export const { setUserAuth, logout } = authSlice.actions;
 export default authSlice.reducer;

@@ -6,14 +6,14 @@ function Products() {
   const products = useLoaderData();
 
   return (
-    <div className="mx-auto w-4/5 grid xl:grid-cols-4 mt-5">
+    <div className="mx-auto w-4/5 grid gap-3 xl:grid-cols-4 mt-5">
       {products.map((product) => (
         <Link
           to={product._id}
           key={product._id}
           className="flex justify-center flex-col gap-2"
         >
-          <img className="h-80" src={BASE_URL + product.photo} />
+          <img className="h-80" src={BASE_URL + product.photo[0]} />
           <p className="text-zinc-600 text-sm font-semibold border-b border-zinc-400">
             {product.name}
           </p>
