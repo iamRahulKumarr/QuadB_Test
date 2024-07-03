@@ -1,10 +1,11 @@
-import { useLoaderData } from 'react-router-dom';
-import { fetchCart } from '../services/APIServices';
+// import { useLoaderData } from 'react-router-dom';
+// import { fetchCart } from '../../services/APIServices';
 import CartItem from './CartItem';
+import { useSelector } from 'react-redux';
+import { getCartItems } from '../../redux/slice/cart';
 
 function Cart() {
-  const cart = useLoaderData();
-  console.log(cart);
+  const cart = useSelector(getCartItems);
   return (
     <>
       <h1 className="font-bold text-center xl:text-3xl text-zinc-700 pt-5 pb-10">
@@ -19,8 +20,8 @@ function Cart() {
   );
 }
 
-export async function loader() {
-  const data = await fetchCart();
-  return data;
-}
+// export async function loader() {
+//   const data = await fetchCart();
+//   return data;
+// }
 export default Cart;

@@ -1,18 +1,34 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getAuthError, getIsLogged, login } from '../redux/slice/auth';
-import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getAuthError, getIsLogged, login } from '../../redux/slice/auth';
+
+import Button from '../../ui/Button';
+import Input from '../../ui/Input';
+import ErrorMessage from '../../ui/ErrorMessage';
+import { useEffect } from 'react';
 
 function Login() {
+  const dispatch = useDispatch();
   const loginError = useSelector(getAuthError);
   const isUserLogged = useSelector(getIsLogged);
-  const dispatch = useDispatch();
+  const [showError, setShowError] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  useEffect(
+    function () {
+      if (loginError) {
+        setShowError(true);
+        const timer = setTimeout(() => setShowError(false), 3000);
+        return () => clearTimeout(timer);
+      }
+    },
+    [loginError]
+  );
 
   function handleChange(e) {
     setFormData({
@@ -35,11 +51,7 @@ function Login() {
 
   return (
     <div className="w-4/5 mx-auto mt-16">
-      {loginError && (
-        <p className="text-center font-bold text-sm mb-5">
-          ❌&nbsp;{loginError}
-        </p>
-      )}
+      {showError && <ErrorMessage message={loginError} />}
       <h1 className="font-bold text-center xl:text-3xl text-zinc-700">
         Welcome &nbsp; :)
       </h1>
@@ -47,32 +59,21 @@ function Login() {
         className="flex flex-col items-center gap-5 mt-8 w-2/6 mx-auto"
         onSubmit={handleLogin}
       >
-        <input
-          className="border border-zinc-400 py-2 px-4 w-full focus:outline-none"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-        />
-        <input
-          className="border border-zinc-400 py-2 px-4 w-full focus:outline-none"
+        <Input name="email" value={formData.email} onChange={handleChange} />
+
+        <Input
           name="password"
-          type="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="Enter your password"
         />
 
-        <button className="bg-red-600 text-white py-2 px-4 w-full font-bold uppercase">
-          Login
-        </button>
-        <p>
-          Not Registered?{' '}
-          <Link to={'/register'} className="text-red-600 font-bold text-sm">
+        <Button type="button__full">Login</Button>
+        <div>
+          <p className="inline-block">Not Registered?&nbsp;</p>
+          <Button type="link__text" redirect="/register">
             Register
-          </Link>
-        </p>
+          </Button>
+        </div>
       </form>
     </div>
   );

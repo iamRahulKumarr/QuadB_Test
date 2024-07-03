@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAuthError, getIsLogged, register } from '../redux/slice/auth';
+import { getAuthError, getIsLogged, register } from '../../redux/slice/auth';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 

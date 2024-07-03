@@ -8,6 +8,9 @@ router
   .post(authController.protect, cartController.create)
   .get(authController.protect, cartController.getAll);
 
-router.route('/:id').put(authController.protect, cartController.updateOne);
+router
+  .route('/:id')
+  .put(authController.protect, cartController.updateOne)
+  .delete(authController.protect, cartController.deleteOne);
 
 module.exports = router;

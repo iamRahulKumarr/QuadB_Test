@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom';
-import { BASE_URL, fetchProducts } from '../services/APIServices';
+import { BASE_URL, fetchProducts } from '../../services/APIServices';
 import { Link } from 'react-router-dom';
 
 function Products() {

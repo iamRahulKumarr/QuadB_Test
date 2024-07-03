@@ -5,6 +5,8 @@ exports.create = handlerFactory.createOne(Cart);
 
 exports.getAll = handlerFactory.getAll(Cart, { path: 'product' });
 
+exports.getOne = handlerFactory.getOne(Cart, { path: 'product' });
+
 exports.updateOne = handlerFactory.updateOne(Cart, { path: 'product' });
 
 exports.deleteOne = handlerFactory.deleteOne(Cart);

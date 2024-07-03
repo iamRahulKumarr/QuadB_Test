@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "66825efcb88dc63718f4af02"
+  },
+  "categoryId": {
+    "$oid": "668175cffb20e6dde4aa24b4"
+  },
+  "name": "Supima: Dusty Pink",
+  "gender": "male",
+  "photo": "products/1719820028027-photo-1715930225_8451763.jpg",
+  "description": "Make long lasting impressions wherever you go with this t-shirt from our Supima Collection that is made to last! Crafted from the world's strongest cotton, this t-shirt will surely stand the test of time and help create a number of great looks!\n\nStyle Tip: Pair these tees with slim-fit bottoms for a balanced look. Throw on a denim jacket or layer with accessories to enhance your street-style appeal. Whether you pair them with jeans, shorts, or joggers, these tees effortlessly complement any style.",
+  "price": 999,
+  "stock": 15,
+  "status": true,
+  "createdAt": {
+    "$date": "2024-07-01T07:42:34.547Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668271bdf629f921c6146927"
+  },
+  "categoryId": {
+    "$oid": "668177ab67d3708cea09c5f8"
+  },
+  "name": "Disney: Trip To The Stars",
+  "gender": "female",
+  "photo": "products/1719824829793-photo-1714658005_7218483.jpg",
+  "description": "Official Licensed Disney Women Oversized T-Shirt",
+  "price": 999,
+  "stock": 10,
+  "status": true,
+  "createdAt": {
+    "$date": "2024-07-01T08:17:22.860Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6683c58c669452739dbe8fad"
+  },
+  "categoryId": {
+    "$oid": "668175cffb20e6dde4aa24b4"
+  },
+  "name": "Minions: Blah Blah Blah",
+  "gender": "male",
+  "photo": [
+    "products/1719911820859-photo-1711002011_2346958.jpg",
+    "products/1719911820869-photo-1690368815_8513366.jpg"
+  ],
+  "description": "Official Licensed Minions Merch\n\nSouledsters! Make way, the Minion Army is here!\n\nEveryone's favourite, banana-loving characters from Despicable Me are here to add a dash of fun and a whole lot of quirk to your wardrobe.\n\nOf course our new Minions Collection was approved by Stuart, Bob and Kevin, who asked us for a whole lot of Paneer Tikka Masala before signing off on the designs!\n\nDesigned for comfort, this new range from The Souled Store features premium quality t-shirts and more that make for great conversation starters.\n\nBuy exclusive Minions merch only from The Souled Store",
+  "price": 999,
+  "stock": 10,
+  "status": true,
+  "createdAt": {
+    "$date": "2024-07-02T08:21:49.551Z"
+  },
+  "__v": 0
+}]

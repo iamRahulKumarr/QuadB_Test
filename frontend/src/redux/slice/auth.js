@@ -46,6 +46,9 @@ const authSlice = createSlice({
       state.token = token;
       state.isLogged = true;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
     logout: (state) => {
       state.user = {};
       state.error = '';

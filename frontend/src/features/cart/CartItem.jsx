@@ -1,17 +1,23 @@
 /* eslint-disable react/prop-types */
 
 import { useState } from 'react';
-import { BASE_URL } from '../services/APIServices';
-import { useDispatch } from 'react-redux';
-import { getCartItemQuantity, updateCartItem } from '../redux/slice/cart';
 import { useSelector } from 'react-redux';
 
-function CartItem({ product }) {
-  const dispatch = useDispatch();
+import { BASE_URL } from '../../services/APIServices';
+import {
+  getCartItemQuantity,
+  // getCartStats,
+} from '../../redux/slice/cart';
 
+import UpdateCartQuantity from './UpdateCartQuantity';
+import RemoveFromCart from './RemoveFromCart';
+
+function CartItem({ product }) {
+  // const { status: cartStatus } = useSelector(getCartStats);
   const { quantity: cartItemQuantity } = useSelector((state) =>
     getCartItemQuantity(state, product._id)
   );
+  console.log(product);
   const [quantity, setQuantity] = useState(cartItemQuantity);
 
   function handleIncrement() {
@@ -22,6 +28,7 @@ function CartItem({ product }) {
       setQuantity((quantity) => (quantity -= 1));
     }
   }
+
   return (
     <div className="flex gap-5">
       <img className="h-64" src={BASE_URL + product.product.photo[0]} />
@@ -31,14 +38,14 @@ function CartItem({ product }) {
             {product.product.name}
           </h2>
           <span className="font-bold text-xl">
-            ₹&nbsp;{product.product.price * quantity}
+            ₹&nbsp;{product.product.price * cartItemQuantity}
           </span>
         </div>
         <p className="text-lg text-zinc-600 font-semibold">
           Price:&nbsp; ₹{product.product.price}
         </p>
 
-        <div className="space-x-5 mt-5">
+        <div className="flex gap-5 items-center mt-5">
           <button
             className="rounded-full border-4 border-red-500 py-2 px-3"
             onClick={handleDecrement}
@@ -52,17 +59,11 @@ function CartItem({ product }) {
           >
             +
           </button>
-          {quantity !== product.quantity && (
-            <button
-              className="bg-red-600 text-white py-2 px-4 font-bold uppercase"
-              onClick={() =>
-                dispatch(updateCartItem({ cartId: product._id, quantity }))
-              }
-            >
-              Apply
-            </button>
+          {quantity !== cartItemQuantity && (
+            <UpdateCartQuantity productId={product._id} quantity={quantity} />
           )}
         </div>
+        <RemoveFromCart productId={product._id} />
       </div>
     </div>
   );

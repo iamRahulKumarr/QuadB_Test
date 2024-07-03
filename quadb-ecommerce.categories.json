@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "668175cffb20e6dde4aa24b4"
+  },
+  "name": "oversized t-shirts",
+  "photo": "categories/1719760335721-photo-male.jpg",
+  "status": true,
+  "createdAt": {
+    "$date": "2024-06-30T14:26:04.976Z"
+  },
+  "__v": 0,
+  "gender": "male"
+},
+{
+  "_id": {
+    "$oid": "668177ab67d3708cea09c5f8"
+  },
+  "name": "oversized t-shirts",
+  "gender": "female",
+  "photo": "categories/1719760811086-photo-female.jpg",
+  "status": true,
+  "createdAt": {
+    "$date": "2024-06-30T15:19:07.706Z"
+  },
+  "__v": 0
+}]

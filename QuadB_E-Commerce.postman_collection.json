@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "950f67ae-7c14-40e2-95ed-d720cefbbaaf",
+		"name": "QuadB_E-Commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33046051"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"jwt\", pm.response.json().data.token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}api/user/login"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "Register",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"jwt\", pm.response.json().token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"username\":\"Rahul Kumar\",\r\n   \"email\":\"rahul.web404@gmail.com\",\r\n   \"password\":\"12345678\",\r\n   \"confirmPassword\":\"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}api/customer/register"
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"jwt\", pm.response.json().token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n     \"email\":\"rahul.web404@gmail.com\",\r\n   \"password\":\"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}api/user/login"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{jwt}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "name",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "photo",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Minions: Blah Blah Blah",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "male",
+											"type": "text"
+										},
+										{
+											"key": "categoryId",
+											"value": "668175cffb20e6dde4aa24b4",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "999",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Official Licensed Minions Merch\n\nSouledsters! Make way, the Minion Army is here!\n\nEveryone's favourite, banana-loving characters from Despicable Me are here to add a dash of fun and a whole lot of quirk to your wardrobe.\n\nOf course our new Minions Collection was approved by Stuart, Bob and Kevin, who asked us for a whole lot of Paneer Tikka Masala before signing off on the designs!\n\nDesigned for comfort, this new range from The Souled Store features premium quality t-shirts and more that make for great conversation starters.\n\nBuy exclusive Minions merch only from The Souled Store",
+											"type": "text"
+										},
+										{
+											"key": "stock",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": [
+												"postman-cloud:///1ef38533-f1d7-41b0-9298-08b49e5ea53e",
+												"postman-cloud:///1ef38533-8421-42b0-ab94-16cd64c29ce4"
+											]
+										}
+									]
+								},
+								"url": "{{BASE_URL}}api/product"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "All",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{jwt}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "postman-cloud:///1ef36f42-7ecb-4880-900b-5bfdecf38be7",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "oversized t-shirt",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "female",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{BASE_URL}}api/category"
+							},
+							"response": []
+						},
+						{
+							"name": "all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{BASE_URL}}api/category"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{BASE_URL}}api/cart"
+					},
+					"response": []
+				},
+				{
+					"name": "view",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}api/cart"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

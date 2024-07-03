@@ -13,11 +13,17 @@ export async function fetchCatgories() {
   }
 }
 
-export async function fetchProducts(gender) {
+export async function fetchProducts(gender = '') {
   try {
-    const response = await axios.get(BASE_URL + 'api/product', {
-      params: { gender },
-    });
+    let api;
+    if (!gender) {
+      api = axios.get(BASE_URL + 'api/product');
+    } else {
+      api = axios.get(BASE_URL + 'api/product', {
+        params: { gender },
+      });
+    }
+    const response = await api;
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -64,6 +70,25 @@ export async function addToCart(userId, productId, quantity = 1) {
   return response.data.data;
 }
 
+export async function updateProduct(product) {
+  console.log(product);
+  const response = await axios.put(
+    BASE_URL + `api/product/${product.id}`,
+    {
+      name: product.name,
+      description: product.description,
+      price: product.price,
+    },
+    {
+      headers: {
+        Authorization: userToken,
+      },
+    }
+  );
+
+  return response.data.data;
+}
+
 export async function fetchCart() {
   const response = await axios.get(BASE_URL + 'api/cart', {
     params: {
@@ -78,7 +103,6 @@ export async function fetchCart() {
 }
 
 export async function updateCart(cartId, quantity) {
-  console.log(cartId, quantity);
   const response = await axios.put(
     BASE_URL + `api/cart/${cartId}`,
     { quantity },
@@ -90,4 +114,13 @@ export async function updateCart(cartId, quantity) {
   );
 
   return response.data.data;
+}
+
+export async function removeItemFromCart(cartId) {
+  const response = await axios.delete(BASE_URL + `api/cart/${cartId}`, {
+    headers: {
+      Authorization: userToken,
+    },
+  });
+  return response;
 }

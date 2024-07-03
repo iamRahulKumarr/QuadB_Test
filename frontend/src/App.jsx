@@ -2,19 +2,34 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-import { setUserAuth } from './redux/slice/auth';
+import { getIsLogged, setUserAuth } from './redux/slice/auth';
 import { addToCartWhileLogged } from './redux/slice/cart';
 
 import AppLayout from './ui/AppLayout';
 import Home, { loader as homeLoader } from './ui/Home';
-import Cart, { loader as cartLoader } from './ui/Cart';
-import Register from './ui/Register';
-import Login from './ui/Login';
-import ProductDetail, { loader as productInfoLoader } from './ui/ProductDetail';
-import Products, { loader as productsLoader } from './ui/Products';
+import Cart from './features/cart/Cart';
+import Register from './features/auth/Register';
+import Login from './features/auth/Login';
+import ProductDetail, {
+  loader as productInfoLoader,
+} from './features/product/ProductDetail';
+import Products, {
+  loader as productsLoader,
+} from './features/product/Products';
+import AdminMenu, {
+  loader as adminMenuLoader,
+} from './features/admin/AdminMenu';
+import AdminEdit, {
+  loader as adminProductLoaderForEdit,
+} from './features/admin/AdminEdit';
+import { useSelector } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
+  const isUserLogged = useSelector(getIsLogged);
+  if (isUserLogged) {
+    dispatch(addToCartWhileLogged());
+  }
 
   useEffect(
     function () {
@@ -26,7 +41,6 @@ function App() {
         dispatch(
           setUserAuth({ username, id, email, userType, token: userToken })
         );
-        dispatch(addToCartWhileLogged());
       }
     },
     [dispatch]
@@ -41,6 +55,16 @@ function App() {
           loader: homeLoader,
         },
         {
+          path: '/admin',
+          element: <AdminMenu />,
+          loader: adminMenuLoader,
+        },
+        {
+          path: '/admin/edit/:productId',
+          element: <AdminEdit />,
+          loader: adminProductLoaderForEdit,
+        },
+        {
           path: '/category/:gender',
           element: <Products />,
           loader: productsLoader,
@@ -53,7 +77,7 @@ function App() {
         {
           path: '/cart',
           element: <Cart />,
-          loader: cartLoader,
+          // loader: cartLoader,
         },
         {
           path: '/login',
