@@ -38,23 +38,91 @@
 },
 {
   "_id": {
-    "$oid": "6683c58c669452739dbe8fad"
+    "$oid": "66865bf201ef9ca850b32c79"
   },
-  "categoryId": {
-    "$oid": "668175cffb20e6dde4aa24b4"
+  "name": "Popeye: Seas The Day",
+  "gender": "male",
+  "photo": "products/1720081394151-photo-1718467122_7021630.jpg",
+  "description": "Official Licensed Popeye Oversized T-Shirt.\r\n\r\nI yam what I yam. Super strength not included, but this design packs a punch! Designed for those who appreciate lounging around in style, these tees are a wardrobe essential. Perfect for any occasion, from casual outings to chilling at home, these tees are your new go-to's.\r\n\r\nStyle Tip: Pair these tees with slim-fit bottoms for a balanced look. Whether you pair them with jeans, shorts, or joggers, these tees effortlessly complement any style.",
+  "price": 1299,
+  "status": true,
+  "createdAt": {
+    "$date": "2024-07-04T08:10:40.475Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66865c4201ef9ca850b32c84"
+  },
+  "name": "Kung Fu Panda: Back Off",
+  "gender": "male",
+  "photo": "products/1720081474904-photo-1719034664_3924525.jpg",
+  "description": "Official Licensed Kung Fu Panda Oversized T-Shirt.\r\n\r\nBring a bowl of noodles, get a pair of nunchucks, and learn to master your inner peace bro! Designed for those who appreciate lounging around in style, these tees are a wardrobe essential. Perfect for any occasion, from casual outings to chilling at home, these tees are your new go-to's.\r\n\r\nStyle Tip: Pair these tees with slim-fit bottoms for a balanced look. Whether you pair them with jeans, shorts, or joggers, these tees effortlessly complement any style",
+  "price": 1049,
+  "status": true,
+  "createdAt": {
+    "$date": "2024-07-04T08:10:40.475Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66865c8301ef9ca850b32c8f"
   },
   "name": "Minions: Blah Blah Blah",
   "gender": "male",
-  "photo": [
-    "products/1719911820859-photo-1711002011_2346958.jpg",
-    "products/1719911820869-photo-1690368815_8513366.jpg"
-  ],
-  "description": "Official Licensed Minions Merch\n\nSouledsters! Make way, the Minion Army is here!\n\nEveryone's favourite, banana-loving characters from Despicable Me are here to add a dash of fun and a whole lot of quirk to your wardrobe.\n\nOf course our new Minions Collection was approved by Stuart, Bob and Kevin, who asked us for a whole lot of Paneer Tikka Masala before signing off on the designs!\n\nDesigned for comfort, this new range from The Souled Store features premium quality t-shirts and more that make for great conversation starters.\n\nBuy exclusive Minions merch only from The Souled Store",
+  "photo": "products/1720081539928-photo-1711002011_2346958.jpg",
+  "description": "Official Licensed Minions Merch\r\n\r\nSouledsters! Make way, the Minion Army is here!\r\n\r\nEveryone's favourite, banana-loving characters from Despicable Me are here to add a dash of fun and a whole lot of quirk to your wardrobe.\r\n\r\nOf course our new Minions Collection was approved by Stuart, Bob and Kevin, who asked us for a whole lot of Paneer Tikka Masala before signing off on the designs!\r\n\r\nDesigned for comfort, this new range from The Souled Store features premium quality t-shirts and more that make for great conversation starters.\r\n\r\nBuy exclusive Minions merch only from The Souled Store",
   "price": 999,
-  "stock": 10,
   "status": true,
   "createdAt": {
-    "$date": "2024-07-02T08:21:49.551Z"
+    "$date": "2024-07-04T08:10:40.475Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66865cea01ef9ca850b32c9c"
+  },
+  "name": "Tom And Jerry: Devious Duo",
+  "gender": "female",
+  "photo": "products/1720081642168-photo-1710405580_1935387.jpg",
+  "description": "Official Licensed Tom and Jerry Women Oversized T-shirt.\r\n\r\nShop for Tom And Jerry: Devious Duo Off White at The Souled Store.",
+  "price": 999,
+  "status": true,
+  "createdAt": {
+    "$date": "2024-07-04T08:10:40.475Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66865d7f01ef9ca850b32cb2"
+  },
+  "name": "The Office: Angela's Cats",
+  "gender": "female",
+  "photo": "products/1720081791564-photo-1713526945_8483778.jpg",
+  "description": "Official Licensed The Office Oversized T-Shirts.\r\n\r\nShop for The Office Angela's Cats Women Oversized T-Shirts and other Cool merchandise online in India exclusively at The Souled Store.",
+  "price": 999,
+  "status": true,
+  "createdAt": {
+    "$date": "2024-07-04T08:10:40.475Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66865deb01ef9ca850b32cbd"
+  },
+  "name": "Grow With The Flow",
+  "gender": "female",
+  "photo": "products/1720081899939-photo-1714656819_2545961.jpg",
+  "description": "Shop for Grow With The Flow Women Oversized T-Shirts at The Souled Store.",
+  "price": 999,
+  "status": true,
+  "createdAt": {
+    "$date": "2024-07-04T08:10:40.475Z"
   },
   "__v": 0
 }]
