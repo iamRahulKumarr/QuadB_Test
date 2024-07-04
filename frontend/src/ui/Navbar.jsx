@@ -23,7 +23,11 @@ function Navbar() {
           <Button type="link__round" redirect="/cart">
             <ion-icon name="cart-outline"></ion-icon>
           </Button>
-          {userType === 'admin' && <Button redirect="/admin">Manage</Button>}
+          {userType === 'admin' && (
+            <Button type="link" redirect="/admin">
+              Manage
+            </Button>
+          )}
 
           <Logout />
         </div>

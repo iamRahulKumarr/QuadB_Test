@@ -1,34 +1,37 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useLoaderData } from 'react-router-dom';
 
-import {
-  BASE_URL,
-  fetchProductInfo,
-  updateProduct,
-} from '../../services/APIServices';
-
-import DeleteProduct from './DeleteProduct';
 import Button from '../../ui/Button';
 import UploadImage from './UploadImage';
+import { useNavigate } from 'react-router-dom';
+import { createProduct } from '../../services/APIServices';
 
-function AdminEdit() {
-  const product = useLoaderData();
+import defaultImg from '../../assets/default_img.jpg';
+
+function AdminProductAdd() {
+  const navigate = useNavigate();
   const [showMessage, setShowMessage] = useState(false);
   const [formMessage, setFormMessage] = useState('');
-  const [image, setImage] = useState(product.photo);
+  const [image, setImage] = useState(defaultImg);
+
   const [formData, setFormData] = useState({
-    name: product.name,
-    price: product.price,
-    description: product.description,
-    gender: product.gender,
+    name: '',
+    price: '',
+    description: '',
+    gender: 'male',
   });
+
+  console.log(formData);
+
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
+  const handleImageChange = (file) => {
+    setImage(file);
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
       const data = new FormData();
       data.append('name', formData.name);
@@ -37,14 +40,8 @@ function AdminEdit() {
       data.append('description', formData.description);
       data.append('gender', formData.gender);
 
-      const response = await updateProduct(product._id, data);
-      setFormData({
-        name: response.name,
-        price: response.price,
-        description: response.description,
-        gender: response.gender,
-      });
-      return setFormMessage('👍 Product Updated Successfully.');
+      await createProduct(data);
+      navigate(-1);
     } catch (err) {
       return setFormMessage('❌ ' + err.response.data.message);
     }
@@ -58,19 +55,13 @@ function AdminEdit() {
     [formMessage]
   );
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="py-5"
-      encType="multipart/form-data"
-    >
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       {showMessage && <p className="text-center my-5 ">{formMessage}</p>}
       <div className="grid xl:grid-cols-2 gap-5 mt-5 px-5">
-        <div className="flex justify-center gap-1">
-          {/* {product.photo.map((photo) => (
-            <img key={photo} className="h-96" src={BASE_URL + photo} />
-          ))} */}
-          <UploadImage currentImage={BASE_URL + image} setImage={setImage} />
+        <div className="mx-auto">
+          <UploadImage currentImage={image} setImage={handleImageChange} />
         </div>
+
         <div>
           <input
             type="text"
@@ -117,19 +108,9 @@ function AdminEdit() {
       </div>
       <div className="flex justify-center gap-5">
         <Button type="submit">Submit</Button>
-
-        <DeleteProduct
-          productId={product._id}
-          setFormMessage={setFormMessage}
-        />
       </div>
     </form>
   );
 }
 
-export async function loader({ params }) {
-  const { productId } = params;
-  const data = await fetchProductInfo(productId);
-  return data;
-}
-export default AdminEdit;
+export default AdminProductAdd;

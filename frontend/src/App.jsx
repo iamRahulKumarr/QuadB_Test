@@ -23,6 +23,7 @@ import AdminEdit, {
   loader as adminProductLoaderForEdit,
 } from './features/admin/AdminEdit';
 import { useSelector } from 'react-redux';
+import AdminProductAdd from './features/admin/AdminProductAdd';
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,10 @@ function App() {
           path: '/admin',
           element: <AdminMenu />,
           loader: adminMenuLoader,
+        },
+        {
+          path: '/admin/product/new',
+          element: <AdminProductAdd />,
         },
         {
           path: '/admin/edit/:productId',

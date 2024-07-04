@@ -13,12 +13,11 @@ import UpdateCartQuantity from './UpdateCartQuantity';
 import RemoveFromCart from './RemoveFromCart';
 
 function CartItem({ product }) {
-  // const { status: cartStatus } = useSelector(getCartStats);
   const { quantity: cartItemQuantity } = useSelector((state) =>
     getCartItemQuantity(state, product._id)
   );
-  console.log(product);
-  const [quantity, setQuantity] = useState(cartItemQuantity);
+  console.log(cartItemQuantity);
+  const [quantity, setQuantity] = useState(cartItemQuantity ?? 1);
 
   function handleIncrement() {
     setQuantity((quantity) => (quantity += 1));
@@ -31,14 +30,15 @@ function CartItem({ product }) {
 
   return (
     <div className="flex gap-5">
-      <img className="h-64" src={BASE_URL + product.product.photo[0]} />
+      <img className="h-64" src={BASE_URL + product.product.photo} />
       <div className="grow space-y-4">
         <div className="flex border-b border-zinc-400">
           <h2 className="text-zinc-600 text-lg font-semibold pb-3 grow">
             {product.product.name}
           </h2>
           <span className="font-bold text-xl">
-            ₹&nbsp;{product.product.price * cartItemQuantity}
+            ₹&nbsp;
+            {product.product.price * cartItemQuantity || product.product.price}
           </span>
         </div>
         <p className="text-lg text-zinc-600 font-semibold">

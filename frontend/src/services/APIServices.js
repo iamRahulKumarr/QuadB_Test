@@ -13,6 +13,13 @@ export async function fetchCatgories() {
   }
 }
 
+export async function createProduct(data) {
+  const response = await axios.post(BASE_URL + 'api/product', data, {
+    headers: { Authorization: userToken },
+  });
+  return response;
+}
+
 export async function fetchProducts(gender = '') {
   try {
     let api;
@@ -37,6 +44,13 @@ export async function fetchProductInfo(productId) {
   } catch (err) {
     console.log(err);
   }
+}
+
+export async function deleteProduct(productId) {
+  const response = await axios.delete(BASE_URL + `api/product/${productId}`, {
+    headers: { Authorization: userToken },
+  });
+  return response;
 }
 
 export async function userLogin(email, password) {
@@ -70,15 +84,10 @@ export async function addToCart(userId, productId, quantity = 1) {
   return response.data.data;
 }
 
-export async function updateProduct(product) {
-  console.log(product);
+export async function updateProduct(productId, data) {
   const response = await axios.put(
-    BASE_URL + `api/product/${product.id}`,
-    {
-      name: product.name,
-      description: product.description,
-      price: product.price,
-    },
+    BASE_URL + `api/product/${productId}`,
+    data,
     {
       headers: {
         Authorization: userToken,

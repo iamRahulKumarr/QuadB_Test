@@ -13,7 +13,7 @@ function Products() {
           key={product._id}
           className="flex justify-center flex-col gap-2"
         >
-          <img className="h-80" src={BASE_URL + product.photo[0]} />
+          <img className="h-80" src={BASE_URL + product.photo} />
           <p className="text-zinc-600 text-sm font-semibold border-b border-zinc-400">
             {product.name}
           </p>

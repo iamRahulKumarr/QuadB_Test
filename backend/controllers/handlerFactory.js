@@ -3,6 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
+    console.log(req.body);
     const doc = await Model.create(req.body);
 
     return res.status(201).json({
@@ -37,6 +38,7 @@ exports.getOne = (Model, popOptions) =>
 
 exports.updateOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
+    console.log(req.body);
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,

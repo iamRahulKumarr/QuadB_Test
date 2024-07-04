@@ -29,6 +29,13 @@ function Button({ type = 'button', redirect, onClick, children }) {
       </button>
     );
   }
+  if (type === 'submit') {
+    return (
+      <button className={classes.button} type="submit" onClick={onClick}>
+        {children}
+      </button>
+    );
+  }
 
   return (
     <button className={classes[type]} onClick={onClick}>

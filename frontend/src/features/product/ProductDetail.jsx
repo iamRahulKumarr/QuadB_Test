@@ -10,15 +10,17 @@ function ProductDetail() {
   return (
     <div className="grid xl:grid-cols-2 gap-5 mt-5 px-5">
       <div className="flex justify-center gap-1">
-        {product.photo.map((photo) => (
-          <img key={photo} className="h-96" src={BASE_URL + photo} />
-        ))}
+        <img
+          key={product.photo}
+          className="h-96"
+          src={BASE_URL + product.photo}
+        />
       </div>
       <div>
         <h2 className="text-zinc-600 text-2xl font-semibold border-b border-zinc-400 pb-5">
           {product.name}{' '}
           <span className="block text-zinc-400 text-sm font-normal capitalize">
-            {product.categoryId.name}
+            Oversized-TShirts
           </span>
         </h2>
         <p className="font-bold text-lg my-5">₹&nbsp;{product.price}</p>
